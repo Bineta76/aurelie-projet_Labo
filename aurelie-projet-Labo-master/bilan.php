@@ -1,8 +1,4 @@
 <?php
-session_start();
-include 'includes/header.php';
-?>
-
 // ----------------------------------------------------
 // Activation des erreurs PHP
 // ----------------------------------------------------
@@ -11,7 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // ----------------------------------------------------
-// Démarrage de la session et inclusion (facultative)
+// Démarrage de la session et inclusion
 // ----------------------------------------------------
 session_start();
 include 'includes/header.php';
@@ -32,10 +28,9 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['texte'])) {
     $texte = trim($_POST['texte']);
     if ($texte !== '') {
+        // Prépare et exécute UNE SEULE requête
         $stmt = $pdo->prepare("INSERT INTO bilan (texte) VALUES (?)");
-        $stmt = $pdo->prepare("INSERT INTO bilan (contenu) VALUES (?)");
-$stmt->execute([$texte]);
-
+        $stmt->execute([$texte]);
         header("Location: " . $_SERVER['PHP_SELF']); // redirection vers la même page
         exit;
     }
@@ -103,6 +98,7 @@ if (isset($_GET['supprimer'])) {
         <div class="alert alert-info text-center">Aucun compte rendu enregistré pour le moment.</div>
     <?php endif; ?>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
