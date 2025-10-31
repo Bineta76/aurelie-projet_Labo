@@ -1,11 +1,12 @@
 <?php
+session_start();
+include 'includes/header.php';
+
 // Activer l'affichage des erreurs
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Démarrer la session
-session_start();
 
 // Configuration de la base de données
 $host = 'localhost';
